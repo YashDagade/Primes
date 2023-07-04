@@ -7,8 +7,6 @@ from scipy.optimize import curve_fit
 import os
 
 
-
-
 def func(x, a, b, c):
     return a * np.exp(-b * x) + c
 
@@ -89,7 +87,7 @@ plt.show()
 df = pd.DataFrame(list(addition_ratios.items()), columns=['Prime', 'Ratio'])
 
 # Specify the directory
-directory = r"C:\Users\Theya\OneDrive - MNSCU\Desktop\Primes"
+directory = r"C:\Users\Theya\OneDrive - MNSCU\Desktop\Primes\Primes"
 filename = f"{limit}_{input_num}.csv"
 filepath = os.path.join(directory, filename)  # Combines the directory and filename
 
