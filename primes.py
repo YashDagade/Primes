@@ -75,33 +75,6 @@ ydata = np.array([addition_ratios[prime] for prime in primes])
 
 popt, pcov = curve_fit(func, xdata, ydata)
 
-plt.figure(figsize=(10,6))
-plt.scatter(xdata, ydata, label='data')
-plt.plot(xdata, func(xdata, *popt), 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
-plt.xlabel('Prime')
-plt.ylabel('Addition Ratio')
-plt.legend()
-plt.show()
-
-
-df = pd.DataFrame(list(addition_ratios.items()), columns=['Prime', 'Ratio'])
-
-# Specify the directory
-directory = r"C:\Users\Theya\OneDrive - MNSCU\Desktop\Primes\Primes"
-filename = f"{limit}_{input_num}.csv"
-filepath = os.path.join(directory, filename)  # Combines the directory and filename
-
-df.to_csv(filepath, index=False)
-
-print(f"Data exported to {filepath}")
-
-from scipy import integrate
-
-# Calculate the integral using the trapezoidal rule
-integral = integrate.trapz(ydata, xdata)
-
-print(f"The integral of the data is: {integral}")
-
 # Generate data for the fit curve
 x_fit = np.linspace(xdata[0], xdata[-1], 1000)
 y_fit = func(x_fit, *popt)
@@ -117,3 +90,19 @@ plt.xlabel('Prime')
 plt.ylabel('Addition Ratio')
 plt.legend()
 plt.show()
+
+# Calculate the sum of all the points
+sum_points = np.sum(ydata)
+
+print(f"The sum of all points is: {sum_points}")
+
+df = pd.DataFrame(list(addition_ratios.items()), columns=['Prime', 'Ratio'])
+
+# Specify the directory
+directory = r"C:\Users\Theya\OneDrive - MNSCU\Desktop\Primes\Primes"
+filename = f"{limit}_{input_num}.csv"
+filepath = os.path.join(directory, filename)  # Combines the directory and filename
+
+df.to_csv(filepath, index=False)
+
+print(f"Data exported to {filepath}")
