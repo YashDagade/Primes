@@ -94,3 +94,26 @@ filepath = os.path.join(directory, filename)  # Combines the directory and filen
 df.to_csv(filepath, index=False)
 
 print(f"Data exported to {filepath}")
+
+from scipy import integrate
+
+# Calculate the integral using the trapezoidal rule
+integral = integrate.trapz(ydata, xdata)
+
+print(f"The integral of the data is: {integral}")
+
+# Generate data for the fit curve
+x_fit = np.linspace(xdata[0], xdata[-1], 1000)
+y_fit = func(x_fit, *popt)
+
+plt.figure(figsize=(10,6))
+plt.scatter(xdata, ydata, label='data')
+plt.plot(x_fit, y_fit, 'r-', label='fit: a=%5.3f, b=%5.3f, c=%5.3f' % tuple(popt))
+
+# Fill the area under the curve
+plt.fill_between(x_fit, y_fit, color='gray', alpha=0.5)
+
+plt.xlabel('Prime')
+plt.ylabel('Addition Ratio')
+plt.legend()
+plt.show()
